@@ -1,5 +1,10 @@
 package king.greg.aoc2021;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Objects;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
@@ -11,8 +16,11 @@ public class Day06Test {
   }
 
   @Test
-  public void testSolution1() {
-    Assertions.assertThat(Day06.calculateNumberOfFish("3,3,2,1,4,1,1,2,3,1,1,2,1,2,1,1,1,1,1,1,4,1,1,5,2,1,1,2,1,1,1,3,5,1,5,5,1,1,1,1,3,1,1,3,2,1,1,1,1,1,1,4,1,1,1,1,1,1,1,4,1,3,3,1,1,3,1,3,1,2,1,3,1,1,4,1,2,4,4,5,1,1,1,1,1,1,4,1,5,1,1,5,1,1,3,3,1,3,2,5,2,4,1,4,1,2,4,5,1,1,5,1,1,1,4,1,1,5,2,1,1,5,1,1,1,5,1,1,1,1,1,3,1,5,3,2,1,1,2,2,1,2,1,1,5,1,1,4,5,1,4,3,1,1,1,1,1,1,5,1,1,1,5,2,1,1,1,5,1,1,1,4,4,2,1,1,1,1,1,1,1,3,1,1,4,4,1,4,1,1,5,3,1,1,1,5,2,2,4,2,1,1,3,1,5,5,1,1,1,4,1,5,1,1,1,4,3,3,3,1,3,1,5,1,4,2,1,1,5,1,1,1,5,5,1,1,2,1,1,1,3,1,1,1,2,3,1,2,2,3,1,3,1,1,4,1,1,2,1,1,1,1,3,5,1,1,2,1,1,1,4,1,1,1,1,1,2,4,1,1,5,3,1,1,1,2,2,2,1,5,1,3,5,3,1,1,4,1,1,4", 80)).isEqualTo(380758);
+  public void testSolution1() throws URISyntaxException, IOException {
+    final var lines = Files.readAllLines(Paths.get(
+        Objects.requireNonNull(getClass().getClassLoader().getResource("Day06/input.txt"))
+            .toURI()));
+    Assertions.assertThat(Day06.calculateNumberOfFish(lines.get(0), 80)).isEqualTo(380758);
   }
 
   @Test
@@ -21,7 +29,10 @@ public class Day06Test {
   }
 
   @Test
-  public void testSolution2() {
-    Assertions.assertThat(Day06.calculateNumberOfFish("3,3,2,1,4,1,1,2,3,1,1,2,1,2,1,1,1,1,1,1,4,1,1,5,2,1,1,2,1,1,1,3,5,1,5,5,1,1,1,1,3,1,1,3,2,1,1,1,1,1,1,4,1,1,1,1,1,1,1,4,1,3,3,1,1,3,1,3,1,2,1,3,1,1,4,1,2,4,4,5,1,1,1,1,1,1,4,1,5,1,1,5,1,1,3,3,1,3,2,5,2,4,1,4,1,2,4,5,1,1,5,1,1,1,4,1,1,5,2,1,1,5,1,1,1,5,1,1,1,1,1,3,1,5,3,2,1,1,2,2,1,2,1,1,5,1,1,4,5,1,4,3,1,1,1,1,1,1,5,1,1,1,5,2,1,1,1,5,1,1,1,4,4,2,1,1,1,1,1,1,1,3,1,1,4,4,1,4,1,1,5,3,1,1,1,5,2,2,4,2,1,1,3,1,5,5,1,1,1,4,1,5,1,1,1,4,3,3,3,1,3,1,5,1,4,2,1,1,5,1,1,1,5,5,1,1,2,1,1,1,3,1,1,1,2,3,1,2,2,3,1,3,1,1,4,1,1,2,1,1,1,1,3,5,1,1,2,1,1,1,4,1,1,1,1,1,2,4,1,1,5,3,1,1,1,2,2,2,1,5,1,3,5,3,1,1,4,1,1,4", 256)).isEqualTo(1710623015163L);
+  public void testSolution2() throws URISyntaxException, IOException {
+    final var lines = Files.readAllLines(Paths.get(
+        Objects.requireNonNull(getClass().getClassLoader().getResource("Day06/input.txt"))
+            .toURI()));
+    Assertions.assertThat(Day06.calculateNumberOfFish(lines.get(0), 256)).isEqualTo(1710623015163L);
   }
 }

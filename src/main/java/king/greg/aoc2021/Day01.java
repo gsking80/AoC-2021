@@ -1,31 +1,14 @@
 package king.greg.aoc2021;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Day01 {
 
   final List<Integer> numbers;
 
-  public Day01(FileReader fileReader) {
-    try {
-      final BufferedReader buf = new BufferedReader(fileReader);
-      numbers = new ArrayList<>();
-
-      while (true) {
-        final String lineJustFetched = buf.readLine();
-        if (null == lineJustFetched) {
-          break;
-        } else {
-          numbers.add(Integer.valueOf(lineJustFetched));
-        }
-      }
-    } catch (IOException ioe) {
-      throw new RuntimeException();
-    }
+  public Day01(final List<String> input) {
+    numbers = input.stream().map(Integer::parseInt).collect(Collectors.toList());
   }
 
   public int countIncreases() {

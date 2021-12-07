@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class Day06 {
 
-  private Day06() {}
+  private Day06() {
+  }
 
   public static long calculateNumberOfFish(final String start, final int days) {
 
@@ -22,5 +23,4 @@ public class Day06 {
     }
     return Arrays.stream(fish).sum();
   }
-
 }

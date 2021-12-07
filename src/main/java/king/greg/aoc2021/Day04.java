@@ -1,8 +1,5 @@
 package king.greg.aoc2021;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -12,32 +9,23 @@ public class Day04 {
   final List<String> numbers;
   final List<String[][]> bingoCards;
 
-  public Day04(FileReader fileReader) {
-    try {
-      final var buf = new BufferedReader(fileReader);
-      numbers = new ArrayList<>();
-      bingoCards = new ArrayList<>();
+  public Day04(final List<String> lines) {
 
-      final String numberList = buf.readLine();
-      numbers.addAll(Arrays.asList(numberList.split(",")));
+    numbers = new ArrayList<>();
+    bingoCards = new ArrayList<>();
 
-      while (true) {
-        final String lineJustFetched = buf.readLine();
-        if (null == lineJustFetched) {
-          break;
-        } else {
-          final var bingoCard = new String[5][5];
-          for (var i = 0; i < 5; i++) {
-            final String line = buf.readLine();
-            for (var j = 0; j < 5; j++) {
-              bingoCard[i][j] = line.substring(j*3, j*3 + 2).trim();
-            }
-          }
-          bingoCards.add(bingoCard);
+    final String numberList = lines.get(0);
+    numbers.addAll(Arrays.asList(numberList.split(",")));
+
+    for (var x = 1; x < lines.size(); x += 6) {
+      final var bingoCard = new String[5][5];
+      for (var i = 0; i < 5; i++) {
+        final String line = lines.get(x + i + 1);
+        for (var j = 0; j < 5; j++) {
+          bingoCard[i][j] = line.substring(j * 3, j * 3 + 2).trim();
         }
       }
-    } catch (IOException ioe) {
-      throw new RuntimeException();
+      bingoCards.add(bingoCard);
     }
   }
 
@@ -56,16 +44,16 @@ public class Day04 {
             lastNumber = numberCalled;
           }
         } else {
-          return score(winningCards.get(0),numberCalled);
+          return score(winningCards.get(0), numberCalled);
         }
       }
     }
-    return score(lastWinner,lastNumber);
+    return score(lastWinner, lastNumber);
   }
 
   private void callNumber(String numberCalled) {
     for (final String[][] bingoCard : bingoCards) {
-      for (var i = 0; i < 5 ; i++) {
+      for (var i = 0; i < 5; i++) {
         for (var j = 0; j < 5; j++) {
           if (bingoCard[i][j].equals(numberCalled)) {
             bingoCard[i][j] = "X";
@@ -106,5 +94,4 @@ public class Day04 {
     }
     return winners;
   }
-
 }

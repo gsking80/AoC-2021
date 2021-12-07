@@ -1,8 +1,5 @@
 package king.greg.aoc2021;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,26 +7,12 @@ public class Day03 {
 
   final List<String> input;
 
-  public Day03(FileReader fileReader) {
-    try {
-      final BufferedReader buf = new BufferedReader(fileReader);
-      input = new ArrayList<>();
-
-      while (true) {
-        final String lineJustFetched = buf.readLine();
-        if (null == lineJustFetched) {
-          break;
-        } else {
-          input.add(lineJustFetched);
-        }
-      }
-    } catch (IOException ioe) {
-      throw new RuntimeException();
-    }
+  public Day03(final List<String> input) {
+    this.input = input;
   }
 
   public int calculatePowerConsumption() {
-    final int[] counts = new int[input.get(0).length()];
+    final var counts = new int[input.get(0).length()];
     for (final String line : input) {
       for (var i = 0; i < line.length(); i++) {
         if (line.charAt(i) == '1') {
@@ -37,8 +20,8 @@ public class Day03 {
         }
       }
     }
-    final StringBuilder gammaBuilder = new StringBuilder();
-    final StringBuilder epsilonBuilder = new StringBuilder();
+    final var gammaBuilder = new StringBuilder();
+    final var epsilonBuilder = new StringBuilder();
     for (final int count : counts) {
       gammaBuilder.append((count > input.size() / 2) ? '1' : '0');
       epsilonBuilder.append((count > input.size() / 2) ? '0' : '1');

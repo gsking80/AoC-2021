@@ -1,31 +1,13 @@
 package king.greg.aoc2021;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Day02 {
 
   final List<String> course;
 
-  public Day02(FileReader fileReader) {
-    try {
-      final BufferedReader buf = new BufferedReader(fileReader);
-      course = new ArrayList<>();
-
-      while (true) {
-        final String lineJustFetched = buf.readLine();
-        if (null == lineJustFetched) {
-          break;
-        } else {
-          course.add(lineJustFetched);
-        }
-      }
-    } catch (IOException ioe) {
-      throw new RuntimeException();
-    }
+  public Day02(final List<String> course) {
+    this.course = course;
   }
 
   public int calculatePosition() {
@@ -44,6 +26,8 @@ public class Day02 {
         case "up":
           depth -= Integer.parseInt(parts[1]);
           break;
+        default:
+          throw new IllegalStateException("Unexpected value: " + parts[0]);
       }
     }
     return horizontal * depth;
@@ -67,9 +51,10 @@ public class Day02 {
         case "up":
           aim -= Integer.parseInt(parts[1]);
           break;
+        default:
+          throw new IllegalStateException("Unexpected value: " + parts[0]);
       }
     }
     return horizontal * depth;
   }
-
 }
