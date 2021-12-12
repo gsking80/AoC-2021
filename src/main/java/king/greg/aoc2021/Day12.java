@@ -51,9 +51,10 @@ public class Day12 {
           if (nextStep.equals(nextStep.toLowerCase()) && path.contains(nextStep) && !hasTime) {
             break;
           }
-          var stillHasTime = !(nextStep.equals(nextStep.toLowerCase()) && path.contains(nextStep));
+          var stillHasTime =
+              hasTime && !(nextStep.equals(nextStep.toLowerCase()) && path.contains(nextStep));
           path.add(nextStep);
-          distinctPaths += pathfinder(hasTime && stillHasTime);
+          distinctPaths += pathfinder(stillHasTime);
           path.removeLast();
       }
     }
