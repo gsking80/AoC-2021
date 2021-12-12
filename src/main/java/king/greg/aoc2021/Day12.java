@@ -2,6 +2,7 @@ package king.greg.aoc2021;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,8 +11,8 @@ public class Day12 {
 
   public static final String START = "start";
   public static final String END = "end";
-  public static final String TRUE = "true";
   final Map<String, List<String>> paths;
+  final Deque<String> path;
 
   public Day12(final List<String> lines) {
     paths = new HashMap<>();
@@ -24,68 +25,36 @@ public class Day12 {
       nextSteps2.add(parts[0]);
       paths.put(parts[1], nextSteps2);
     }
+    path = new ArrayDeque<>();
   }
 
   final int distinctPaths() {
-    final var fullPaths = new ArrayDeque<List<String>>();
-    final var seedList = new ArrayList<String>();
-    seedList.add(START);
-    fullPaths.add(seedList);
-    var distinctPaths = 0;
-    while (!fullPaths.isEmpty()) {
-      final var currentPath = fullPaths.remove();
-      final var currentPosition = currentPath.get(currentPath.size() - 1);
-      final var nextSteps = paths.get(currentPosition);
-      for (final var nextStep : nextSteps) {
-        switch (nextStep) {
-          case END:
-            distinctPaths++;
-            break;
-          case START:
-            break;
-          default:
-            if (nextStep.equals(nextStep.toLowerCase()) && currentPath.contains(nextStep)) {
-              break;
-            }
-            final var newPath = new ArrayList<>(currentPath);
-            newPath.add(nextStep);
-            fullPaths.add(newPath);
-        }
-      }
-    }
-    return distinctPaths;
+    path.add(START);
+    return pathfinder(false);
   }
 
   final int distinctPathsWithTime() {
-    final var fullPaths = new ArrayDeque<List<String>>();
-    final var seedList = new ArrayList<String>();
-    seedList.add(TRUE);
-    seedList.add(START);
-    fullPaths.add(seedList);
+    path.add(START);
+    return pathfinder(true);
+  }
+
+  final int pathfinder(final boolean hasTime) {
     var distinctPaths = 0;
-    while (!fullPaths.isEmpty()) {
-      final var currentPath = fullPaths.remove();
-      final var currentPosition = currentPath.get(currentPath.size() - 1);
-      final var nextSteps = paths.get(currentPosition);
-      for (final var nextStep : nextSteps) {
-        switch (nextStep) {
-          case END:
-            distinctPaths++;
+    for (final var nextStep : paths.get(path.peekLast())) {
+      switch (nextStep) {
+        case END:
+          distinctPaths++;
+          break;
+        case START:
+          break;
+        default:
+          if (nextStep.equals(nextStep.toLowerCase()) && path.contains(nextStep) && !hasTime) {
             break;
-          case START:
-            break;
-          default:
-            if (nextStep.equals(nextStep.toLowerCase()) && currentPath.contains(nextStep) && !TRUE
-                .equals(currentPath.get(0))) {
-              break;
-            }
-            final var newPath = new ArrayList<>(currentPath);
-            newPath.add(nextStep);
-            if ((nextStep.equals(nextStep.toLowerCase()) && currentPath.contains(nextStep))) {
-              newPath.set(0, "false");
-            }
-            fullPaths.add(newPath);
-        }
+          }
+          var stillHasTime = !(nextStep.equals(nextStep.toLowerCase()) && path.contains(nextStep));
+          path.add(nextStep);
+          distinctPaths += pathfinder(hasTime && stillHasTime);
+          path.removeLast();
       }
     }
     return distinctPaths;
