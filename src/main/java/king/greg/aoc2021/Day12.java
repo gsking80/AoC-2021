@@ -26,16 +26,7 @@ public class Day12 {
       paths.put(parts[1], nextSteps2);
     }
     path = new ArrayDeque<>();
-  }
-
-  final int distinctPaths() {
     path.add(START);
-    return pathfinder(false);
-  }
-
-  final int distinctPathsWithTime() {
-    path.add(START);
-    return pathfinder(true);
   }
 
   final int pathfinder(final boolean hasTime) {

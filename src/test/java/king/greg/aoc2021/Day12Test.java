@@ -16,7 +16,7 @@ public class Day12Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day12/test.txt"))
             .toURI()));
     final Day12 day12 = new Day12(lines);
-    Assertions.assertThat(day12.distinctPaths()).isEqualTo(10);
+    Assertions.assertThat(day12.pathfinder(false)).isEqualTo(10);
   }
 
   @Test
@@ -25,7 +25,7 @@ public class Day12Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day12/input.txt"))
             .toURI()));
     final Day12 day12 = new Day12(lines);
-    Assertions.assertThat(day12.distinctPaths()).isEqualTo(3497);
+    Assertions.assertThat(day12.pathfinder(false)).isEqualTo(3497);
   }
 
   @Test
@@ -34,7 +34,7 @@ public class Day12Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day12/test.txt"))
             .toURI()));
     final Day12 day12 = new Day12(lines);
-    Assertions.assertThat(day12.distinctPathsWithTime()).isEqualTo(36);
+    Assertions.assertThat(day12.pathfinder(true)).isEqualTo(36);
   }
 
   @Test
@@ -43,6 +43,6 @@ public class Day12Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day12/input.txt"))
             .toURI()));
     final Day12 day12 = new Day12(lines);
-    Assertions.assertThat(day12.distinctPathsWithTime()).isEqualTo(93686);
+    Assertions.assertThat(day12.pathfinder(true)).isEqualTo(93686);
   }
 }
