@@ -35,7 +35,12 @@ public class Day13Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day13/test.txt"))
             .toURI()));
     final Day13 day13 = new Day13(lines);
-    day13.printCode();
+    Assertions.assertThat(day13.printCode()).isEqualTo("\n"
+        + "█████\n"
+        + "█   █\n"
+        + "█   █\n"
+        + "█   █\n"
+        + "█████");
   }
 
   @Test
@@ -44,6 +49,12 @@ public class Day13Test {
         Objects.requireNonNull(getClass().getClassLoader().getResource("Day13/input.txt"))
             .toURI()));
     final Day13 day13 = new Day13(lines);
-    day13.printCode();
+    Assertions.assertThat(day13.printCode()).isEqualTo("\n"
+        + "█  █ ████  ██  ███  ████ █  █ ███  ███ \n"
+        + "█  █ █    █  █ █  █    █ █ █  █  █ █  █\n"
+        + "████ ███  █    █  █   █  ██   █  █ █  █\n"
+        + "█  █ █    █    ███   █   █ █  ███  ███ \n"
+        + "█  █ █    █  █ █ █  █    █ █  █    █ █ \n"
+        + "█  █ ████  ██  █  █ ████ █  █ █    █  █");
   }
 }

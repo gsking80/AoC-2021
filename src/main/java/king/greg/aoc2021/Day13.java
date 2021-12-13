@@ -38,7 +38,7 @@ public class Day13 {
     return paper.size();
   }
 
-  public void printCode() {
+  public String printCode() {
     pointsAfterFolds(instructions.size());
     final var maxX = paper.stream().max(Comparator.comparing(Point::getX))
         .orElse(new Point(0, 0)).x;
@@ -51,7 +51,7 @@ public class Day13 {
         sb.append(paper.contains(new Point(x, y)) ? '█' : ' ');
       }
     }
-    System.out.println(sb.toString());
+    return (sb.toString());
   }
 
   private void foldLeft(final int foldLine) {
