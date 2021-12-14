@@ -1,6 +1,5 @@
 package king.greg.aoc2021;
 
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
@@ -41,7 +40,7 @@ public class Day14 {
       frequencies.put(entry.getKey().charAt(1),
           frequencies.getOrDefault(entry.getKey().charAt(1), 0L) + entry.getValue());
     }
-    return (frequencies.values().stream().max(Comparator.comparing(Long::longValue)).orElse(0L)
-        - frequencies.values().stream().min(Comparator.comparing(Long::longValue)).orElse(0L)) / 2;
+    return (frequencies.values().stream().mapToLong(l -> l).max().orElse(0L)
+        - frequencies.values().stream().mapToLong(l -> l).min().orElse(0L)) / 2;
   }
 }
