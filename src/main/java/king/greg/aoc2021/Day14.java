@@ -16,7 +16,6 @@ public class Day14 {
       var segment = template.substring(i, i + 2);
       counts.put(segment, counts.getOrDefault(segment, 0L) + 1);
     }
-    frequencies.put(template.charAt(0), 1L);
     frequencies.put(template.charAt(template.length() - 1), 1L);
     final var rules = new HashMap<String, Character>();
     for (var i = 2; i < lines.size(); i++) {
@@ -37,10 +36,8 @@ public class Day14 {
     for (final var entry : counts.entrySet()) {
       frequencies.put(entry.getKey().charAt(0),
           frequencies.getOrDefault(entry.getKey().charAt(0), 0L) + entry.getValue());
-      frequencies.put(entry.getKey().charAt(1),
-          frequencies.getOrDefault(entry.getKey().charAt(1), 0L) + entry.getValue());
     }
     return (frequencies.values().stream().mapToLong(l -> l).max().orElse(0L)
-        - frequencies.values().stream().mapToLong(l -> l).min().orElse(0L)) / 2;
+        - frequencies.values().stream().mapToLong(l -> l).min().orElse(0L));
   }
 }
