@@ -55,11 +55,10 @@ public class Day11 {
   }
 
   private void increase(final Point octopus) {
-    if (octopus.x < 0 || octopus.x > 9 || octopus.y < 0 || octopus.y > 9) {
+    if (!octopusEnergy.containsKey(octopus)) {
       return;
     }
-    var energy = octopusEnergy.get(octopus);
-    energy++;
+    var energy = octopusEnergy.get(octopus) + 1;
     octopusEnergy.put(octopus, energy);
     if (energy > 9) {
       flash(octopus);
