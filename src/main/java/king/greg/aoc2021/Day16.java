@@ -86,9 +86,9 @@ public class Day16 {
         case 1: //product
           return subPackets.stream().mapToLong(Packet::value).reduce(1, (a, b) -> a * b);
         case 2: //minimum
-          return subPackets.stream().mapToLong(Packet::value).min().orElse(0);
+          return subPackets.stream().mapToLong(Packet::value).min().orElseThrow();
         case 3: //maximum
-          return subPackets.stream().mapToLong(Packet::value).max().orElse(0);
+          return subPackets.stream().mapToLong(Packet::value).max().orElseThrow();
         case 4: //literal
           return literalValue;
         case 5: //greater than
