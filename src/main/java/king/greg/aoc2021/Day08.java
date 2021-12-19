@@ -17,7 +17,7 @@ public class Day08 {
     var count = 0;
     for (final var line : lines) {
       count += Arrays.stream(line.split(" \\| ")[1].split(" ")).filter(
-          p -> (p.length() == 2) || (p.length() == 3) || (p.length() == 4) || (p.length() == 7))
+              p -> (p.length() == 2) || (p.length() == 3) || (p.length() == 4) || (p.length() == 7))
           .count();
     }
     return count;
