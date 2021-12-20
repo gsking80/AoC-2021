@@ -54,7 +54,7 @@ public class Day18 {
         value += valueToAdd;
         return null;
       }
-      return right.addLeftMost(left.addLeftMost(valueToAdd));
+      return left.addLeftMost(valueToAdd);
     }
 
     private Integer addRightMost(final Integer valueToAdd) {
@@ -65,7 +65,7 @@ public class Day18 {
         value += valueToAdd;
         return null;
       }
-      return left.addRightMost(right.addRightMost(valueToAdd));
+      return right.addRightMost(valueToAdd);
     }
 
     public boolean split() {
