@@ -7,8 +7,7 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Day21 {
 
-  private Day21() {
-  }
+  final Map<Pair<Pair<Integer, Integer>, Pair<Integer, Integer>>, Pair<Long, Long>> memo = new HashMap<>();
 
   private static final int[] rollDistributions = {1, 3, 6, 7, 6, 3, 1};
 
@@ -52,6 +51,36 @@ public class Day21 {
       states = newStates;
     }
     return Arrays.stream(wins).max().getAsLong();
+  }
+
+  public long diracWinsAlternate(final int playerOneStart, final int playerTwoStart) {
+    final var initialState = Pair.of(Pair.of(playerOneStart, 0), Pair.of(playerTwoStart, 0));
+    var value = memoLookup(initialState);
+    return Math.max(value.getLeft(),value.getRight());
+  }
+
+  private Pair<Long,Long> memoLookup (final Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> currentState) {
+    var value = memo.get(currentState);
+    if (null == value) {
+      var currentPlayerState = currentState.getLeft();
+      var otherPlayerState = currentState.getRight();
+      var currentPlayerWins = 0L;
+      var otherPlayerWins = 0L;
+      if (otherPlayerState.getRight() >= 21) {
+        value = Pair.of(0L,1L);
+      } else {
+        for (var rolls = 3; rolls < 10; rolls++) {
+          var newCurrentPlayerState = newState(currentPlayerState, rolls);
+          var wins = memoLookup(Pair.of(otherPlayerState,newCurrentPlayerState));
+          long count = rollDistributions[rolls - 3];
+          currentPlayerWins += count * wins.getRight();
+          otherPlayerWins += count * wins.getLeft();
+        }
+        value = Pair.of(currentPlayerWins,otherPlayerWins);
+      }
+      memo.put(currentState, value);
+    }
+    return value;
   }
 
   private static Pair<Integer, Integer> newState(final Pair<Integer, Integer> currentState,

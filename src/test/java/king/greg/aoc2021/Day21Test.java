@@ -24,4 +24,16 @@ public class Day21Test {
   public void testSolution2() {
     Assertions.assertThat(Day21.diracWins(8, 1)).isEqualTo(116741133558209L);
   }
+
+  @Test
+  public void testSample2Alternate() {
+    final Day21 day21 = new Day21();
+    Assertions.assertThat(day21.diracWinsAlternate(4, 8)).isEqualTo(444356092776315L);
+  }
+
+  @Test
+  public void testSolution2Alternate() {
+    final Day21 day21 = new Day21();
+    Assertions.assertThat(day21.diracWinsAlternate(8, 1)).isEqualTo(116741133558209L);
+  }
 }
