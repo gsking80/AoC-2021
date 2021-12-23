@@ -56,27 +56,28 @@ public class Day21 {
   public long diracWinsAlternate(final int playerOneStart, final int playerTwoStart) {
     final var initialState = Pair.of(Pair.of(playerOneStart, 0), Pair.of(playerTwoStart, 0));
     var value = memoLookup(initialState);
-    return Math.max(value.getLeft(),value.getRight());
+    return Math.max(value.getLeft(), value.getRight());
   }
 
-  private Pair<Long,Long> memoLookup (final Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> currentState) {
+  private Pair<Long, Long> memoLookup(
+      final Pair<Pair<Integer, Integer>, Pair<Integer, Integer>> currentState) {
     var value = memo.get(currentState);
     if (null == value) {
       var currentPlayerState = currentState.getLeft();
       var otherPlayerState = currentState.getRight();
       var currentPlayerWins = 0L;
       var otherPlayerWins = 0L;
-      if (otherPlayerState.getRight() >= 21) {
-        value = Pair.of(0L,1L);
+      if (otherPlayerState.getRight() >= 2) {
+        value = Pair.of(0L, 1L);
       } else {
         for (var rolls = 3; rolls < 10; rolls++) {
           var newCurrentPlayerState = newState(currentPlayerState, rolls);
-          var wins = memoLookup(Pair.of(otherPlayerState,newCurrentPlayerState));
+          var wins = memoLookup(Pair.of(otherPlayerState, newCurrentPlayerState));
           long count = rollDistributions[rolls - 3];
           currentPlayerWins += count * wins.getRight();
           otherPlayerWins += count * wins.getLeft();
         }
-        value = Pair.of(currentPlayerWins,otherPlayerWins);
+        value = Pair.of(currentPlayerWins, otherPlayerWins);
       }
       memo.put(currentState, value);
     }

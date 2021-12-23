@@ -54,5 +54,4 @@ public class Day22Test {
     final var day22 = new Day22(lines);
     Assertions.assertThat(day22.rebootedCubes()).isEqualTo(1294137045134837L);
   }
-  
 }
